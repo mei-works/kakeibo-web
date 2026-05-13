@@ -1,0 +1,200 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;700&family=Noto+Sans+JP:wght@400;500&display=swap');
+
+/* ===== 初期設定 ===== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 15px;
+  line-height: 1.7;
+  color: #2c2c2a;
+  background-color: #f6f5f0;
+  min-height: 100vh;
+}
+
+/* ===== ページのレイアウト ===== */
+.page-wrapper {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 4rem;
+}
+
+/* ===== ヘッダーのレイアウト ===== */
+.site-header {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 2.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #d3d1c7;
+}
+
+.site-header h1 {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: #1a1a19;
+}
+
+.site-header .subtitle {
+  font-size: 13px;
+  color: #888780;
+}
+
+/* ===== カードのレイアウト ===== */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.month-card {
+  background: #ffffff;
+  border: 1px solid #d3d1c7;
+  border-radius: 14px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.month-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.07);
+}
+
+/* ===== 収支バーのレイアウト ===== */
+.card-month {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 17px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: #1a1a19;
+}
+
+/* ===== 収入・支出の数値行 ===== */
+.bar-section {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.bar-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.bar-label {
+  font-size: 11px;
+  color: #888780;
+  width: 26px;
+  flex-shrink: 0;
+}
+
+.bar-track {
+  flex: 1;
+  height: 7px;
+  background: #eeecea;
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.bar-fill {
+  height: 100%;
+  border-radius: 99px;
+  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.bar-fill.income  { background: #1D9E75; }
+.bar-fill.expense { background: #D85A30; }
+
+/* ラベル横の色丸 */
+.amount-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.amount-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.amount-label {
+  font-size: 13px;
+  color: #888780;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* ===== 仕切り線 ===== */
+.dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.dot.income  { background: #1D9E75; }
+.dot.expense { background: #D85A30; }
+
+.amount-value {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.amount-value.income  { color: #0F6E56; }
+.amount-value.expense { color: #993C1D; }
+
+/* ===== 収支合計 ===== */
+.divider {
+  height: 1px;
+  background: #eeecea;
+}
+
+/* ===== メッセージ ===== */
+.balance-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.balance-label {
+  font-size: 13px;
+  color: #888780;
+}
+
+.balance-value {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  transition: color 0.2s;
+}
+/* ===== メッセージ ===== */
+.balance-value.plus  { color: #0F6E56; }
+.balance-value.minus { color: #993C1D; }
+.balance-value.zero  { color: #888780; }
+
+/* ===== メッセージ ===== */
+.card-message {
+  font-size: 12px;
+  line-height: 1.65;
+  color: #5f5e5a;
+  background: #f6f5f0;
+  border-radius: 8px;
+  padding: 9px 12px;
+}
+
+/* ===== レスポンシブ ===== */
+@media (max-width: 480px) {
+  .site-header h1 { font-size: 20px; }
+  .card-grid { grid-template-columns: 1fr; }
+}

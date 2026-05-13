@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>家計簿アプリ</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="page-wrapper">
+
+  <header class="site-header">
+    <h1>家計簿アプリ</h1>
+    <span class="subtitle">月別収支サマリー</span>
+  </header>
+
+  <div class="card-grid">
+
+    {% for item in data %}
+    <div class="month-card"
+         data-income="{{ item.income }}"
+         data-expense="{{ item.expense }}">
+
+      <div class="card-month">{{ item.month }}</div>
+
+      <div class="bar-section">
+        <div class="bar-row">
+          <span class="bar-label">収入</span>
+          <div class="bar-track">
+            <div class="bar-fill income" style="width: 0%"></div>
+          </div>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">支出</span>
+          <div class="bar-track">
+            <div class="bar-fill expense" style="width: 0%"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="amount-rows">
+        <div class="amount-row">
+          <span class="amount-label">
+            <span class="dot income"></span>収入
+          </span>
+          <span class="amount-value income">¥{{ "{:,}".format(item.income) }}</span>
+        </div>
+        <div class="amount-row">
+          <span class="amount-label">
+            <span class="dot expense"></span>支出
+          </span>
+          <span class="amount-value expense">¥{{ "{:,}".format(item.expense) }}</span>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="balance-row">
+        <span class="balance-label">収支</span>
+        <span class="balance-value">
+          {% if item.balance > 0 %}+{% endif %}¥{{ "{:,}".format(item.balance) }}
+        </span>
+      </div>
+
+      <p class="card-message">{{ item.message }}</p>
+
+    </div>
+    {% endfor %}
+
+  </div>
+
+</div>
+
+<script src="{{ url_for('static', filename='kakeibo.js') }}"></script>
+
+</body>
+</html>
