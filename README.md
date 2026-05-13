@@ -1,5 +1,5 @@
 # 概要
-Pythonで作成した家計簿アプリです。
+Flask + HTML/CSS/JavaScriptで作成した家計簿Webアプリです。
 
 ## 使用技術
 - Python
