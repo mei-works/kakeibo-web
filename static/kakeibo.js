@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // data-* 属性から数値を読み取る（HTML側で data-income, data-expense を渡す）
     const income  = parseInt(card.dataset.income,  10) || 0;
     const expense = parseInt(card.dataset.expense, 10) || 0;
-    const max     = Math.max(income, expense, 1); // 0除算を防ぐため最小1
+    const max     = Math.max(income, expense, 1); // 最小を1に設定
 
     // 収入バーと支出バーのパーセント幅（最大を100%とする）
     const incPct = Math.round((income  / max) * 100);
@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const incBar = card.querySelector(".bar-fill.income");
     const expBar = card.querySelector(".bar-fill.expense");
 
-    // widthを0にしてからセットすることでCSS transitionが発火する
+    // 最初に0%にしてから変更すると、CSS transitionが作動する
     if (incBar) {
       incBar.style.width = "0%";
       requestAnimationFrame(function () {
