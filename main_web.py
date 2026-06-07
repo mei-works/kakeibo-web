@@ -32,13 +32,17 @@ def load_data():
                 print("日付入力ミス")
 
             if month not in data:
-                data[month] = {"income": 0, "expence": 0}
+                data[month] = {"income": 0, "expence": 0, "categories": {}}
 
             #集計
             if type == "収入":
                 data[month]["income"]+= amount
             else: # 区分が"支出"の場合
-                data[month]["expence"]+= amount 
+                data[month]["expence"]+= amount
+                # カテゴリ別に支出を集計
+                if category not in data[month]["categories"]:
+                    data[month]["categories"][category] = 0
+                data[month]["categories"][category] += amount
             
     #取り出し・計算
     results = []
@@ -56,19 +60,29 @@ def load_data():
             message = "収支が赤字です。支出の項目を見直してみましょう"
         
         results.append({
-            "month": month,
-            "income": income,
-            "expense": expence,
-            "balance": balance,
-            "message": message
-            })    
-        
+        "month": month,
+        "income": income,
+        "expense": expence,
+        "balance": balance,
+        "message": message,
+        "categories": data[month].get("categories", {})  # カテゴリ別支出を追加    
+        })
+    # 全期間のカテゴリ別支出を集計
+    all_categories = {}
+    for month in data:
+        for cat, amt in data[month]["categories"].items():
+            if cat not in all_categories:
+                all_categories[cat] = 0
+            all_categories[cat] += amt
+
+        return {"monthly": results, "all_categories": all_categories}   
     return results
     
 @app.route("/")
 def home():
-    data = load_data()    
-    return render_template("index.html", data=data)
-
+    result = load_data()
+    return render_template("index.html",
+                           data=result["monthly"],
+                           all_categories=result["all_categories"])
 if __name__ == "__main__":
     app.run(debug=True)
