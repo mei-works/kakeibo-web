@@ -1,7 +1,7 @@
 # 概要
 Flask + HTML/CSS/JavaScriptで作成した家計簿Webアプリです。
 
-##公開URL
+公開URL
 https://kakeibo-web-mk7z.onrender.com
 
 ## 使用技術
