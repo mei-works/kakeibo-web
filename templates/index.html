@@ -16,6 +16,108 @@
     <span class="subtitle">月別収支サマリー</span>
   </header>
 
+  <!-- 使い方ガイド -->
+<div class="guide-card">
+  <div class="guide-title">📖 使い方</div>
+  <ol class="guide-list">
+    <li>「積立目標を設定」で積立名・目標金額・達成月を登録</li>
+    <li>「収支を追加」で日々の収支を入力
+      <ul class="guide-sub">
+        <li>収支タイプ：<strong>収入 / 支出 / 積立 / 積立引出</strong>から選択</li>
+        <li>収支タイプは、積み立てを行う場合には「積立」に、積み立てた分の金額を取り崩す場合には「積立引出」にしてください</li>
+        <li>積立・積立引出を行う場合、カテゴリーは <strong>「積立_〇〇」</strong> の形式で入力してください</li>
+      </ul>
+    </li>
+    <li>月別カードとグラフで収支・積立状況を確認、分析することができます</li>
+  </ol>
+</div>
+
+  <!-- ===== 入力フォーム ===== -->
+  <div class="form-card">
+    <div class="form-card-title">収支を追加</div>
+
+    <div class="form-row">
+
+      <div class="form-group">
+        <label class="form-label" for="inputType">収支タイプ</label>
+        <select id="inputType" class="form-select">
+          <option value="支出">支出</option>
+          <option value="収入">収入</option>
+          <option value="積立">積立</option>
+          <option value="積立引出">積立引出</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="inputCategory">カテゴリー</label>
+        <input id="inputCategory" class="form-input" type="text"
+               placeholder="例：食費、交際費" list="categoryList">
+        <datalist id="categoryList">
+          <option value="食費">
+          <option value="交際費">
+          <option value="日用品">
+          <option value="交通費">
+          <option value="衣服">
+          <option value="美容">
+          <option value="カフェ">
+          <option value="娯楽">
+          <option value="雑費">
+          <option value="予備費">
+          <option value="カード引落">
+          <option value="バイト1">
+          <option value="バイト2">
+          <option value="バイト3">
+          <option value="副業">
+          <option value="奨学金">
+          {% for key in goals %}
+          <option value="{{ key }}">
+          {% endfor %}   
+        </datalist>
+      </div>
+<div class="form-group">
+        <label class="form-label" for="inputDate">日付</label>
+        <input id="inputDate" class="form-input" type="date"
+               max="{{ today }}">
+      </div>
+      
+      <div class="form-group">
+        <label class="form-label" for="inputAmount">金額（円）</label>
+        <input id="inputAmount" class="form-input" type="number"
+               placeholder="例：1500" min="1">
+      </div>
+
+      <div class="form-group form-group--btn">
+        <button id="saveBtn" class="form-btn">保存する</button>
+      </div>
+
+    </div>
+
+    <p id="formMessage" class="form-message"></p>
+  </div>
+
+  <!-- 積立目標設定フォーム -->
+<div class="form-card">
+  <div class="form-card-title">積立目標を設定</div>
+  <div class="form-row">
+    <div class="form-group">
+      <label class="form-label" for="goalName">積立名</label>
+      <input id="goalName" class="form-input" type="text" placeholder="例：旅行用、教科書代">
+    </div>
+    <div class="form-group">
+      <label class="form-label" for="goalAmount">目標金額（円）</label>
+      <input id="goalAmount" class="form-input" type="number" placeholder="例：50000" min="1">
+    </div>
+    <div class="form-group">
+  <label class="form-label" for="goalDeadline">達成目標月</label>
+  <input id="goalDeadline" class="form-input" type="month">
+</div>
+    <div class="form-group form-group--btn">
+      <button id="goalBtn" class="form-btn">目標を設定</button>
+    </div>
+  </div>
+  <p id="goalMessage" class="form-message"></p>
+</div>
+
   <div class="card-grid">
 
     {% for item in data %}
@@ -70,6 +172,49 @@
     {% endfor %}
 
   </div>
+
+  <!-- 積立目標セクション -->
+<div class="savings-section">
+  <div class="savings-header">積立状況</div>
+
+  {% for key, saved in savings.items() %}
+  {% set goal_data = goals.get(key, {}) %} 
+  {% set goal = goal_data.get("amount", 0) %}
+  {% set deadline = goal_data.get("deadline", "") %}
+  {% set pct = (saved / goal * 100) | round | int if goal > 0 else 0 %}
+  {% set name = key.replace("積立_", "") %}
+  <div class="savings-card"
+     data-saved="{{ saved }}"
+     data-goal="{{ goal }}"
+     data-deadline="{{ deadline }}">
+    <div class="savings-name">{{ name }}</div>
+    <div class="savings-amounts">
+      <span class="savings-saved {% if saved < 0 %}minus{% endif %}">
+  ¥{{ "{:,}".format(saved) }}
+</span>
+      <span class="savings-goal">/ 目標 ¥{{ "{:,}".format(goal) }}</span>
+    </div>
+  <div class="progress-track">
+    <div class="progress-fill" style="width: {{ pct }}%"></div>
+    {% if "旅行" in key %}
+    <div class="progress-icon" style="left: {{ pct }}%">✈️</div>
+    {% elif "教科書" in key %}
+    <div class="progress-icon" style="left: {{ pct }}%">📚</div>
+    {% else %}
+    <div class="progress-icon" style="left: {{ pct }}%">🏦</div>
+    {% endif %}
+    </div>
+    <div class="savings-pct">{{ pct }}%</div>
+    {% if deadline %}
+    <div class="savings-monthly" id="monthly-{{ loop.index }}">計算中...</div> 
+    {% endif %}
+  </div>
+  {% endfor %}
+
+  {% if not savings %}
+  <p class="savings-empty">積立カテゴリーがまだありません。下のフォームから「積立_旅行用」のように入力してください。</p>
+  {% endif %}
+</div>
 
   <!-- 下段グラフエリア -->
   <div class="graphs-section">
