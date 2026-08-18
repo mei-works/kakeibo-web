@@ -1,35 +1,29 @@
-# 家計簿Webアプリ
+#家計簿Webアプリ
+##概要
 
-## 概要
+Python(Flask)・HTML・CSS・JavaScriptを用いて開発した、大学生向け家計簿Webアプリです。 簿記の「引当金」の概念を応用した積立管理機能を実装し、口座を複数作らなくても目的別に資金を仮想的に分けて可視化できます。
 
-Flask・HTML/CSS・JavaScriptを用いて開発した家計簿Webアプリです。
+##公開URL 
 
-**公開URL**
-https://kakeibo-web-mk7z.onrender.com
+##使用技術
+Python
+Flask
+HTML/CSS
+JavaScript
+Chart.js
+GitHub
+Render
 
-## 使用技術
+##主な機能
+Webフォームからの収支入力（CSVへの非同期追記）
+月別の収入・支出・収支の集計と表示
+収支バランスの月別棒グラフ表示
+カテゴリ別支出の円グラフ表示
+積立目標の設定と達成率・月々必要積立額の表示
+入力バリデーション（フロント・サーバーの二重チェック）
 
-* Python
-* Flask
-* HTML/CSS
-* JavaScript
-* Chart.js
-* Matplotlib
-* GitHub
-* Render
-
-## 主な機能
-
-* CSVファイルの読み込み
-* 月別の収入・支出集計
-* 収支バランスの計算
-* カテゴリ別支出の円グラフ表示
-* 月別収入・支出の棒グラフ表示
-* Webブラウザ上での閲覧
-
-## 工夫した点
-
-* Pythonで家計簿データを集計
-* Chart.jsを用いたデータの可視化
-* Renderを利用したデプロイ・公開
-
+##工夫した点
+簿記の引当金の概念を応用し、目的別積立管理機能を実装
+アルバイト・奨学金など大学生特有の収支カテゴリーに対応
+fetchAPIによる非同期通信でページリロードなしの入力体験を実現
+JavaScriptとPythonの両方でバリデーションを実装し、データの整合性を担保
