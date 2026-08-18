@@ -1,28 +1,28 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;700&family=Noto+Sans+JP:wght@400;500&display=swap');
-
+ 
 /* ===== 初期設定 ===== */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
-
+ 
 body {
   font-family: 'Noto Sans JP', sans-serif;
   font-size: 15px;
   line-height: 1.7;
-  color: #2c2c2a;
-  background-color: #f6f5f0;
+  color: #0F172A;
+  background-color: #F8FAFC;
   min-height: 100vh;
 }
-
+ 
 /* ===== ページのレイアウト ===== */
 .page-wrapper {
   max-width: 960px;
   margin: 0 auto;
   padding: 2.5rem 1.5rem 4rem;
 }
-
+ 
 /* ===== ヘッダーのレイアウト ===== */
 .site-header {
   display: flex;
@@ -30,199 +30,437 @@ body {
   gap: 12px;
   margin-bottom: 2.5rem;
   padding-bottom: 1rem;
-  border-bottom: 1px solid #d3d1c7;
+  border-bottom: 1px solid #E2E8F0;
 }
-
+ 
 .site-header h1 {
   font-family: 'Noto Serif JP', serif;
   font-size: 26px;
   font-weight: 700;
-  letter-spacing: 0.05em;
-  color: #1a1a19;
+  letter-spacing: 0.08em;
+  color: #0F172A;
 }
-
+ 
 .site-header .subtitle {
   font-size: 13px;
-  color: #888780;
+  letter-spacing: 0.04em;
+  color: #94A3B8;
 }
-
+ 
 /* ===== カードのレイアウト ===== */
 .card-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 20px;
+  gap: 16px;
 }
-
+ 
 .month-card {
-  background: #ffffff;
-  border: 1px solid #d3d1c7;
-  border-radius: 14px;
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 12px;
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  transition: transform 0.18s ease, box-shadow 0.18s ease;
+  gap: 14px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
-
+ 
 .month-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.07);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.06);
 }
-
-/* ===== 収支バーのレイアウト ===== */
+ 
+/* ===== 月見出し ===== */
 .card-month {
   font-family: 'Noto Serif JP', serif;
-  font-size: 17px;
+  font-size: 16px;
   font-weight: 500;
-  letter-spacing: 0.04em;
-  color: #1a1a19;
+  letter-spacing: 0.06em;
+  color: #0F172A;
 }
-
-/* ===== 収入・支出の数値行 ===== */
+ 
+/* ===== 収支バー ===== */
 .bar-section {
   display: flex;
   flex-direction: column;
   gap: 6px;
 }
-
+ 
 .bar-row {
   display: flex;
   align-items: center;
   gap: 8px;
 }
-
+ 
 .bar-label {
   font-size: 11px;
-  color: #888780;
+  letter-spacing: 0.03em;
+  color: #94A3B8;
   width: 26px;
   flex-shrink: 0;
 }
-
+ 
 .bar-track {
   flex: 1;
-  height: 7px;
-  background: #eeecea;
+  height: 5px;
+  background: #F1F5F9;
   border-radius: 99px;
   overflow: hidden;
 }
-
+ 
 .bar-fill {
   height: 100%;
   border-radius: 99px;
   transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
-
-.bar-fill.income  { background: #2563EB; }
-.bar-fill.expense { background: #F97316; }
-
-/* ラベル横の色丸 */
+ 
+.bar-fill.income  { background: #1E40AF; }
+.bar-fill.expense { background: #CBD5E1; }
+ 
+/* ===== 収入・支出の数値行 ===== */
 .amount-rows {
   display: flex;
   flex-direction: column;
   gap: 6px;
 }
-
+ 
 .amount-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-
+ 
 .amount-label {
-  font-size: 13px;
-  color: #888780;
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  color: #94A3B8;
   display: flex;
   align-items: center;
   gap: 5px;
 }
-
-/* ===== 仕切り線 ===== */
+ 
 .dot {
-  width: 7px;
-  height: 7px;
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
   flex-shrink: 0;
 }
-.dot.income  { background: #2563EB; }
-.dot.expense { background: #F97316; }
-
+.dot.income  { background: #1E40AF; }
+.dot.expense { background: #CBD5E1; }
+ 
 .amount-value {
   font-size: 14px;
   font-weight: 500;
+  letter-spacing: 0.02em;
 }
-
-.amount-value.income  { color: #2563EB; }
-.amount-value.expense { color: #F97316; }
-
-/* ===== 収支合計 ===== */
+ 
+.amount-value.income  { color: #1E40AF; }
+.amount-value.expense { color: #64748B; }
+ 
+/* ===== 仕切り線 ===== */
 .divider {
   height: 1px;
-  background: #eeecea;
+  background: #F1F5F9;
 }
-
-/* ===== メッセージ ===== */
+ 
+/* ===== 収支合計 ===== */
 .balance-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-
+ 
 .balance-label {
-  font-size: 13px;
-  color: #888780;
+  font-size: 12px;
+  letter-spacing: 0.03em;
+  color: #94A3B8;
 }
-
+ 
 .balance-value {
   font-size: 22px;
   font-weight: 700;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.02em;
   transition: color 0.2s;
 }
-/* ===== メッセージ ===== */
-.balance-value.plus  { color: #1D4ED8; }
-.balance-value.minus { color: #EA580C; }
-.balance-value.zero  { color: #888780; }
-
+ 
+.balance-value.plus  { color: #1E40AF; }
+.balance-value.minus { color: #DC2626; }
+.balance-value.zero  { color: #94A3B8; }
+ 
 /* ===== メッセージ ===== */
 .card-message {
   font-size: 12px;
   line-height: 1.65;
-  color: #5f5e5a;
-  background: #f6f5f0;
-  border-radius: 8px;
-  padding: 9px 12px;
+  letter-spacing: 0.02em;
+  color: #94A3B8;
+  background: #F8FAFC;
+  border-radius: 6px;
+  padding: 8px 12px;
 }
-
+ 
 /* ===== レスポンシブ ===== */
 @media (max-width: 480px) {
   .site-header h1 { font-size: 20px; }
   .card-grid { grid-template-columns: 1fr; }
 }
-
+ 
 /* ===== 下段グラフエリア ===== */
 .graphs-section {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 20px;
+  gap: 16px;
   margin-top: 2.5rem;
 }
-
+ 
 .graph-card {
-  background: #ffffff;
-  border: 1px solid #d3d1c7;
-  border-radius: 14px;
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 12px;
   padding: 1.5rem;
 }
-
+ 
 .graph-card-title {
   font-family: 'Noto Serif JP', serif;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 500;
-  color: #1a1a19;
+  letter-spacing: 0.05em;
+  color: #0F172A;
   margin-bottom: 1rem;
   text-align: center;
 }
-
+ 
 @media (max-width: 600px) {
   .graphs-section { grid-template-columns: 1fr; }
 }
+ 
+/* ===== 入力フォーム ===== */
+.form-card {
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+ 
+.form-card-title {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  color: #0F172A;
+  margin-bottom: 1rem;
+}
+ 
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: flex-end;
+}
+ 
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+  min-width: 120px;
+}
+ 
+.form-group--btn {
+  flex: 0 0 auto;
+}
+ 
+.form-label {
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: #94A3B8;
+}
+ 
+.form-input,
+.form-select {
+  height: 38px;
+  padding: 0 10px;
+  border: 1px solid #E2E8F0;
+  border-radius: 7px;
+  font-size: 13px;
+  font-family: 'Noto Sans JP', sans-serif;
+  background: #F8FAFC;
+  color: #0F172A;
+  outline: none;
+  letter-spacing: 0.02em;
+  transition: border-color 0.15s, background 0.15s;
+}
+ 
+.form-input:focus,
+.form-select:focus {
+  border-color: #6366F1;
+  background: #FFFFFF;
+}
+ 
+.form-btn {
+  height: 38px;
+  padding: 0 20px;
+  background: #1E40AF;
+  color: #ffffff;
+  border: none;
+  border-radius: 7px;
+  font-size: 13px;
+  font-family: 'Noto Sans JP', sans-serif;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s;
+}
+ 
+.form-btn:hover    { background: #1E3A8A; }
+.form-btn:disabled { background: #CBD5E1; cursor: not-allowed; }
+ 
+.form-message {
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  margin-top: 10px;
+  min-height: 18px;
+}
+ 
+.form-message.success { color: #1E40AF; }
+.form-message.error   { color: #DC2626; }
+ 
+/* ===== 積立状況セクション ===== */
+.savings-section {
+  margin-top: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+ 
+.savings-header {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 17px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  color: #0F172A;
+  margin-bottom: 4px;
+}
+ 
+.savings-card {
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 12px;
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+ 
+.savings-name {
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: #0F172A;
+}
+ 
+.savings-amounts {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+ 
+.savings-saved {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #1E40AF;
+}
+ 
+.savings-goal {
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  color: #94A3B8;
+}
+ 
+.progress-track {
+  height: 6px;
+  background: #F1F5F9;
+  border-radius: 99px;
+  position: relative;
+  overflow: visible;
+}
+ 
+.progress-fill {
+  height: 100%;
+  background: #1E40AF;
+  border-radius: 99px;
+  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+ 
+.savings-pct {
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: #94A3B8;
+  text-align: right;
+}
+ 
+.savings-empty {
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  color: #94A3B8;
+  padding: 1rem;
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 12px;
+}
+ 
+.savings-monthly {
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  color: #6366F1;
+  font-weight: 500;
+}
+ 
+.savings-saved.minus {
+  color: #DC2626;
+}
+ 
+/* ===== 使い方ガイド ===== */
+.guide-card {
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 12px;
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 1.5rem;
+}
+ 
+.guide-title {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  color: #0F172A;
+  margin-bottom: 0.75rem;
+}
+ 
+.guide-list {
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  color: #64748B;
+  line-height: 2;
+  padding-left: 1.25rem;
+}
+ 
+.guide-sub {
+  font-size: 12px;
+  color: #94A3B8;
+  padding-left: 1rem;
+  line-height: 1.8;
+}
+ 
+/* ===== プログレスアイコン ===== */
+.progress-icon {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 22px;
+  transition: left 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 10;
+}
+ 
